@@ -6,13 +6,18 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var session = require('express-session')
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+//session setup
+app.use(session({           //using session server pe data save hpga
+  resave: false, //agar session ki valu change na hui ho toh fir se save mat krna
+  saveUninitialized:false,
+  secret:"holakrishnahere"
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
