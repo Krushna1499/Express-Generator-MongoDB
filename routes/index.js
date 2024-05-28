@@ -7,6 +7,20 @@ router.get('/', function(req, res) {
   req.session.ban = true;            //session created here and if we want to run it shows hello session 
   res.render('index');
 });
+router.get('/cookies', function(req, res) {
+  res.cookie("age",25);           //created cookies here
+  res.render('index');
+});
+router.get("/read",function(req,res)
+{
+  console.log(req.cookies.age);   //read cookies here
+  res.send("check");
+});
+router.get("/deleteCookie",function(req,res)
+{
+  res.clearCookie("age");       //deleteCookies
+  res.send("clear hogayi");
+})
 router.get('/checkban',function (req,res) {
   if(req.session.ban === true)
     {                                                  //we run req session in any route
@@ -26,8 +40,6 @@ router.get("/removeban",function(req,res)
   res.send("ban removed");
 })
 });
-
-
 router.get("/create", async function(req,res)  //async to handle promise 
 // when we await in any creation file that we need async for the parent function
 {
